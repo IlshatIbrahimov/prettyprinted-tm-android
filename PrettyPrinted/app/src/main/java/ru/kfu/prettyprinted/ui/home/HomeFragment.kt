@@ -12,8 +12,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import ru.kfu.prettyprinted.data.models.User
 import ru.kfu.prettyprinted.data.remote.Resource
-import ru.kfu.prettyprinted.data.remote.UserApi
-import ru.kfu.prettyprinted.data.remote.res.UserResponse
+import ru.kfu.prettyprinted.data.remote.api.UserApi
 import ru.kfu.prettyprinted.data.repository.UserRepository
 import ru.kfu.prettyprinted.databinding.FragmentHomeBinding
 import ru.kfu.prettyprinted.ui.base.BaseFragment
@@ -33,9 +32,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
                 }
             }
         })
+        binding.hpButtonLogout.setOnClickListener{
+            logout()
+        }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun updateUI(user: User) {
         hp_tv_info.text = "Welcome ${user.id} ${user.name} ${user.surname}"
     }
@@ -50,7 +51,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
     override fun getFragmentRepository(): UserRepository {
         val token = runBlocking { userPreferences.authToken.first() }
         Toast.makeText(this.activity, token, Toast.LENGTH_SHORT).show()
-        val api = remoteDataSource.buildApi(UserApi::class.java, token)
+        val api = remoteDataSource.buildApi(UserApi::class.java)
         return UserRepository(api)
     }
 

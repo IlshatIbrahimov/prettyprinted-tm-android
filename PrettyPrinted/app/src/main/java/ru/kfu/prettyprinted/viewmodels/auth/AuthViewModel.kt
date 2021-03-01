@@ -8,10 +8,11 @@ import kotlinx.coroutines.launch
 import ru.kfu.prettyprinted.data.remote.Resource
 import ru.kfu.prettyprinted.data.repository.AuthRepository
 import ru.kfu.prettyprinted.data.remote.res.AuthResponse
+import ru.kfu.prettyprinted.viewmodels.base.BaseViewModel
 
 class AuthViewModel(
     private val repository: AuthRepository
-) : ViewModel() {
+) : BaseViewModel(repository) {
 
     private val _authResponse: MutableLiveData<Resource<AuthResponse>> = MutableLiveData()
 
@@ -22,11 +23,11 @@ class AuthViewModel(
         email: String,
         password: String
     ) = viewModelScope.launch {
-        _authResponse.value =  repository.login(email, password)
+        _authResponse.value = repository.login(email, password)
     }
 
     fun register(
-        name:String,
+        name: String,
         surname: String,
         email: String,
         password: String
@@ -35,7 +36,7 @@ class AuthViewModel(
     }
 
 
-    fun saveAuthToken(token:String) = viewModelScope.launch {
+    suspend fun saveAuthToken(token: String) {
         repository.saveAuthToken(token)
     }
 }

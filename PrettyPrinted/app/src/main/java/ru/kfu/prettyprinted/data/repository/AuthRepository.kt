@@ -1,13 +1,13 @@
 package ru.kfu.prettyprinted.data.repository
 
 import ru.kfu.prettyprinted.data.delegates.UserPreferences
-import ru.kfu.prettyprinted.data.remote.AuthApi
+import ru.kfu.prettyprinted.data.remote.api.AuthApi
 import ru.kfu.prettyprinted.data.remote.req.LoginReq
 import ru.kfu.prettyprinted.data.remote.req.RegisterReq
 
 class AuthRepository(
-    private val api: AuthApi,
-    private val preferences: UserPreferences
+        private val api: AuthApi,
+        private val preferences: UserPreferences
 ): BaseRepository() {
 
     suspend fun login(

@@ -91,4 +91,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0"
 
+    // Feature module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.3.3"
+
+
+    // Jetpack Compose Integration
+    implementation "androidx.navigation:navigation-compose:1.0.0-alpha08"
+
 }

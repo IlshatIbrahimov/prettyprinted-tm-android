@@ -4,6 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import ru.kfu.prettyprinted.data.remote.Resource
+import ru.kfu.prettyprinted.data.remote.api.UserApi
 
 abstract class BaseRepository {
 
@@ -26,5 +27,9 @@ abstract class BaseRepository {
             }
         }
 
+    }
+
+    suspend fun logout(api:UserApi)= safeApiCall {
+        api.logout()
     }
 }

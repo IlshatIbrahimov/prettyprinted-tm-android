@@ -2,12 +2,12 @@ package ru.kfu.prettyprinted
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import ru.kfu.prettyprinted.data.delegates.UserPreferences
 import ru.kfu.prettyprinted.extensions.startNewActivity
+import ru.kfu.prettyprinted.ui.auth.AuthActivity
 import ru.kfu.prettyprinted.ui.home.HomeActivity
 
 class MainActivity : AppCompatActivity() {

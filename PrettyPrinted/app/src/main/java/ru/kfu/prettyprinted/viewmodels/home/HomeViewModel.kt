@@ -12,10 +12,11 @@ import ru.kfu.prettyprinted.data.remote.Resource
 import ru.kfu.prettyprinted.data.remote.res.AuthResponse
 import ru.kfu.prettyprinted.data.remote.res.UserResponse
 import ru.kfu.prettyprinted.data.repository.UserRepository
+import ru.kfu.prettyprinted.viewmodels.base.BaseViewModel
 
 class HomeViewModel(
     private val repository: UserRepository
-): ViewModel() {
+): BaseViewModel(repository) {
     private lateinit var userPreferences: UserPreferences
     private val _user: MutableLiveData<Resource<UserResponse>> = MutableLiveData()
 
