@@ -15,4 +15,10 @@
     <string name="tv_sign_in">Sign in</string>
     <string name="log_in">Log in</string>
     <string name="tv_register_new_account">Register new Account</string>
+    <string name="todo">TODO</string>
+    <string name="dashboard">dashboard</string>
+    <string name="project">project</string>
+    <string name="message">message</string>
+    <string name="profile">profile</string>
+    <string name="create_new_project">Create new Project</string>
 </resources>

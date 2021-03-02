@@ -1,13 +1,10 @@
 package ru.kfu.prettyprinted.ui.home
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import ru.kfu.prettyprinted.data.models.User
@@ -28,7 +25,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
         viewModel.user.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
-                    updateUI(it.value.user)
+                    updateUI(it.value[0])
                 }
             }
         })
@@ -38,7 +35,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
     }
 
     private fun updateUI(user: User) {
-        hp_tv_info.text = "Welcome ${user.id} ${user.name} ${user.surname}"
+        with(binding) {
+            hpTvId.text = user.id.toString()
+            hpTvName.text = user.name
+            hpTvSurname.text = user.surname
+        }
     }
 
     override fun getViewModel() = HomeViewModel::class.java
@@ -50,8 +51,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
 
     override fun getFragmentRepository(): UserRepository {
         val token = runBlocking { userPreferences.authToken.first() }
-        Toast.makeText(this.activity, token, Toast.LENGTH_SHORT).show()
-        val api = remoteDataSource.buildApi(UserApi::class.java)
+        val api = remoteDataUserSource.buildTokenApi(UserApi::class.java, token)
         return UserRepository(api)
     }
 

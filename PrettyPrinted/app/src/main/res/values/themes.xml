@@ -7,4 +7,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="NavBarTheme" parent="Theme.MaterialComponents">
+        <item name="colorSurface">#000</item>
+        <item name="colorOnPrimary">@color/colorPrimary</item>
+    </style>
+
+
+
+
 </resources>

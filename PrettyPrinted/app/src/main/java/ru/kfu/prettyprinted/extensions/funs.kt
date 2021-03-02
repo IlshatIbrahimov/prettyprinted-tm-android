@@ -9,3 +9,5 @@ import ru.kfu.prettyprinted.R
 
 fun String.isValidEmail(): Boolean =
     Regex("""""").matches(this)
+
+
