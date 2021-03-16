@@ -1,25 +1,24 @@
-package ru.kfu.prettyprinted.ui.home
+package ru.kfu.prettyprinted.ui.home.profile
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.Observer
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import ru.kfu.prettyprinted.R
 import ru.kfu.prettyprinted.data.models.User
 import ru.kfu.prettyprinted.data.remote.Resource
 import ru.kfu.prettyprinted.data.remote.api.UserApi
 import ru.kfu.prettyprinted.data.repository.UserRepository
-import ru.kfu.prettyprinted.databinding.FragmentHomeBinding
+import ru.kfu.prettyprinted.databinding.FragmentProfileBinding
 import ru.kfu.prettyprinted.ui.base.BaseFragment
-import ru.kfu.prettyprinted.viewmodels.home.HomeViewModel
+import ru.kfu.prettyprinted.viewmodels.home.UsersViewModel
 
-class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserRepository>() {
+class ProfileFragment : BaseFragment<UsersViewModel, FragmentProfileBinding, UserRepository>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setHasOptionsMenu(true)
         viewModel.getUser()
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
@@ -29,9 +28,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
                 }
             }
         })
-        binding.hpButtonLogout.setOnClickListener{
-            logout()
-        }
     }
 
     private fun updateUI(user: User) {
@@ -42,12 +38,26 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
         }
     }
 
-    override fun getViewModel() = HomeViewModel::class.java
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater?.inflate(R.menu.profile_action_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settings_menu_exit -> {
+               logout()
+            }
+        }
+        return true
+    }
+
+    override fun getViewModel() = UsersViewModel::class.java
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ) = FragmentHomeBinding.inflate(inflater, container, false)
+    ) = FragmentProfileBinding.inflate(inflater, container, false)
 
     override fun getFragmentRepository(): UserRepository {
         val token = runBlocking { userPreferences.authToken.first() }

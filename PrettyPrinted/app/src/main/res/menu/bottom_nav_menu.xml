@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_dashboard"
+        android:id="@+id/nav_project"
+        android:icon="@drawable/project"
+        android:title="@string/project" />
+    <item
+        android:id="@+id/nav_dash_board"
         android:icon="@drawable/dashboard"
         android:title="@string/dashboard" />
 
     <item
-        android:id="@+id/nav_project"
-        android:icon="@drawable/project"
-        android:title="@string/project" />
+        android:id="@+id/nav_create_task"
+        android:icon="@drawable/create"
+        android:title="@string/create_task" />
 
     <item
-        android:id="@+id/nav_message"
+        android:id="@+id/nav_chat"
         android:icon="@drawable/message"
         android:title="@string/message" />
 

@@ -17,16 +17,18 @@ import ru.kfu.prettyprinted.data.remote.managers.NetworkManager
 import ru.kfu.prettyprinted.data.remote.managers.NetworkManagerWithToken
 import ru.kfu.prettyprinted.data.repository.BaseRepository
 import ru.kfu.prettyprinted.extensions.startNewActivity
+import ru.kfu.prettyprinted.ui.home.HomeActivity
 import ru.kfu.prettyprinted.viewmodels.base.BaseViewModel
 import ru.kfu.prettyprinted.viewmodels.base.ViewModelFactory
 
 abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseRepository> : Fragment() {
 
     protected lateinit var userPreferences: UserPreferences
-    protected lateinit var binding: B
+    protected open lateinit var binding: B
     protected lateinit var viewModel: VM
     protected val remoteDataSource = NetworkManager()
     protected val remoteDataUserSource = NetworkManagerWithToken()
+
 
 
     override fun onCreateView(
@@ -46,7 +48,7 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseReposit
 
     fun logout() = lifecycleScope.launch {
         val authToken = userPreferences.authToken.first()
-        val api  = remoteDataUserSource.buildTokenApi(UserApi::class.java, authToken)
+        val api = remoteDataUserSource.buildTokenApi(UserApi::class.java, authToken)
         viewModel.logout(api)
         userPreferences.clear()
         requireActivity().startNewActivity(AuthActivity::class.java)

@@ -6,24 +6,32 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.kfu.prettyprinted.data.remote.Resource
 import ru.kfu.prettyprinted.data.remote.res.ProjectResponse
+import ru.kfu.prettyprinted.data.remote.res.TaskListResponse
 import ru.kfu.prettyprinted.data.repository.ProjectRepository
+import ru.kfu.prettyprinted.data.repository.TaskRepository
 import ru.kfu.prettyprinted.viewmodels.base.BaseViewModel
 
-class TaskViewModel (private val repository: ProjectRepository) : BaseViewModel(repository) {
+class TaskViewModel (private val repository: TaskRepository) : BaseViewModel(repository) {
 
-    private val _project: MutableLiveData<Resource<ProjectResponse>> = MutableLiveData()
+    private val _task: MutableLiveData<Resource<TaskListResponse>> = MutableLiveData()
 
-    val project: LiveData<Resource<ProjectResponse>>
-        get() = _project
+    val task: LiveData<Resource<TaskListResponse>>
+        get() = _task
 
-    fun createProject(
-        name: String
+    fun createTask(
+            assigneeId: String,
+            content: String,
+            priority: String,
+            projectId: String,
+            status: String,
+            taskName: String,
+            type: String
     ) = viewModelScope.launch {
-        _project.value = repository.createProject(name)
+        _task.value = repository.createTask(assigneeId, content, priority, projectId, status, taskName, type)
     }
 
-    fun getProjectList() = viewModelScope.launch {
-        _project.value = repository.getProjectList()
+    fun getTaskList() = viewModelScope.launch {
+        _task.value = repository.getTaskList()
     }
 
 

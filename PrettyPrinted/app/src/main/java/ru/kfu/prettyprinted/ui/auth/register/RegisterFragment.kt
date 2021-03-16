@@ -4,16 +4,12 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_register.*
 import ru.kfu.prettyprinted.R
-import ru.kfu.prettyprinted.extensions.isValidEmail
 import ru.kfu.prettyprinted.extensions.snackbar
 import ru.kfu.prettyprinted.ui.auth.AuthActivity
 
 
 class RegisterFragment :Fragment(R.layout.fragment_register) {
 
-    private lateinit var mName: String
-    private lateinit var mSurname: String
-    private lateinit var mEmail: String
 
     override fun onStart() {
         super.onStart()

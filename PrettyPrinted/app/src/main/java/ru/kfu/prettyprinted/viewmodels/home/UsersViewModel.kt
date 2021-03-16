@@ -9,7 +9,7 @@ import ru.kfu.prettyprinted.data.remote.res.UserResponse
 import ru.kfu.prettyprinted.data.repository.UserRepository
 import ru.kfu.prettyprinted.viewmodels.base.BaseViewModel
 
-class HomeViewModel(
+class UsersViewModel(
     private val repository: UserRepository
 ): BaseViewModel(repository) {
     private val _user: MutableLiveData<Resource<UserResponse>> = MutableLiveData()

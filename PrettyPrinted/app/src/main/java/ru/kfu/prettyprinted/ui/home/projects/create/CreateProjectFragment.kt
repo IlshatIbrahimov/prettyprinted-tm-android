@@ -43,6 +43,7 @@ class CreateProjectFragment : BaseFragment<ProjectViewModel, FragmentCreateProje
 
     fun create() {
         viewModel.createProject(name)
+        (activity as HomeActivity).navController.navigate(R.id.action_page_create_project_to_nav_project)
 
     }
 

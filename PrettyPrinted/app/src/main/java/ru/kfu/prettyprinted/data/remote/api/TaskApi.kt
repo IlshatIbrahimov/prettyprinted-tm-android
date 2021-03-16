@@ -8,7 +8,7 @@ import ru.kfu.prettyprinted.data.remote.res.TaskListResponse
 
 interface TaskApi {
     @POST("task")
-    suspend fun createProject(
+    suspend fun createTask(
             @Body taskReq: TaskReq
     ): TaskListResponse
 
