@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.kfu.prettyprinted.AppConfig
 import ru.kfu.prettyprinted.BuildConfig
 
-class NetworkUserManager {
-    fun <Api> buildUserApi(
+class NetworkManagerWithToken {
+    fun <Api> buildTokenApi(
         api: Class<Api>,
         authToken: String? = null
     ): Api {
