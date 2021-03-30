@@ -19,7 +19,7 @@ import ru.kfu.prettyprinted.viewmodels.home.TaskViewModel
 
 
 class CreateTaskFragment :
-    BaseFragment<TaskViewModel, FragmentCreateTaskBinding, TaskRepository>() {
+        BaseFragment<TaskViewModel, FragmentCreateTaskBinding, TaskRepository>() {
 
     lateinit var name: String
     lateinit var content: String
@@ -45,21 +45,21 @@ class CreateTaskFragment :
 
 
         ct_btn_project.setOnClickListener {
-            replace(R.id.action_nav_create_task_to_nav_project)
+            replace(R.id.action_nav_create_task_to_nav_project, savedInstanceState)
         }
 
         ct_btn_user.setOnClickListener {
-            replace(R.id.action_nav_create_task_to_page_users)
+            replace(R.id.action_nav_create_task_to_page_users, savedInstanceState)
         }
         ct_btn_priority.setOnClickListener {
-            replace(R.id.action_nav_create_task_to_page_priority)
+            replace(R.id.action_nav_create_task_to_page_priority, savedInstanceState)
         }
 
         ct_btn_status.setOnClickListener {
-            replace(R.id.action_nav_create_task_to_page_status)
+            replace(R.id.action_nav_create_task_to_page_status, savedInstanceState)
         }
         ct_btn_type.setOnClickListener {
-            replace(R.id.action_nav_create_task_to_page_type)
+            replace(R.id.action_nav_create_task_to_page_type, savedInstanceState)
         }
 
         ct_btn_create.setOnClickListener {
@@ -78,8 +78,8 @@ class CreateTaskFragment :
         }
     }
 
-    private fun replace(id: Int) {
-        (activity as HomeActivity).navController.navigate(id)
+    private fun replace(id: Int, bundle: Bundle?) {
+        (activity as HomeActivity).navController.navigate(id, bundle)
     }
 
 
@@ -112,8 +112,8 @@ class CreateTaskFragment :
     }
 
     override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
+            inflater: LayoutInflater,
+            container: ViewGroup?
     ) = FragmentCreateTaskBinding.inflate(inflater, container, false)
 
 

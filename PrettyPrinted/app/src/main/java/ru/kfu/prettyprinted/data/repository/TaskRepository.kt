@@ -12,6 +12,10 @@ class TaskRepository (
             api.getTaskList()
         }
 
+        suspend fun getProjectTasks(id: Int) = safeApiCall {
+            api.getProjectTasks(id)
+        }
+
         suspend fun createTask(
                 assigneeId: String,
                 content: String,
