@@ -1,4 +1,4 @@
-package ru.kfu.prettyprinted.data.remote
+package ru.kfu.prettyprinted.data.remote.api
 
 import retrofit2.http.*
 import ru.kfu.prettyprinted.data.remote.req.LoginReq

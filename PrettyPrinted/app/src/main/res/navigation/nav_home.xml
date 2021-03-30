@@ -3,11 +3,110 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_home"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/nav_profile">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="ru.kfu.prettyprinted.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_profile"
+        android:name="ru.kfu.prettyprinted.ui.home.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/page_create_project"
+        android:name="ru.kfu.prettyprinted.ui.home.projects.create.CreateProjectFragment"
+        android:label="Create Project"
+        tools:layout="@layout/fragment_create_project" >
+        <action
+            android:id="@+id/action_page_create_project_to_nav_project"
+            app:destination="@id/nav_project" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_project"
+        android:name="ru.kfu.prettyprinted.ui.home.projects.ProjectListFragment"
+        android:label="Project"
+        tools:layout="@layout/fragment_project_list" >
+        <action
+            android:id="@+id/action_nav_project_to_nav_task"
+            app:destination="@id/page_task" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nav_project_to_page_create_project"
+            app:destination="@id/page_create_project" />
+        <action
+            android:id="@+id/action_nav_project_to_nav_create_task"
+            app:destination="@id/nav_create_task" />
+    </fragment>
+    <fragment
+        android:id="@+id/page_task"
+        android:name="ru.kfu.prettyprinted.ui.home.task.TaskListFragment"
+        android:label="Task"
+        tools:layout="@layout/fragment_task_list" />
+    <fragment
+        android:id="@+id/nav_create_task"
+        android:name="ru.kfu.prettyprinted.ui.home.task.create.CreateTaskFragment"
+        android:label = "Create Task"
+        tools:layout="@layout/fragment_create_task" >
+        <action
+            android:id="@+id/action_nav_create_task_to_nav_project"
+            app:destination="@id/nav_project" />
+        <action
+            android:id="@+id/action_nav_create_task_to_page_users"
+            app:destination="@id/page_users" />
+        <action
+            android:id="@+id/action_nav_create_task_to_page_status"
+            app:destination="@id/page_status" />
+        <action
+            android:id="@+id/action_nav_create_task_to_page_type"
+            app:destination="@id/page_type" />
+        <action
+            android:id="@+id/action_nav_create_task_to_page_priority"
+            app:destination="@id/page_priority" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_chat"
+        android:name="ru.kfu.prettyprinted.ui.home.chats.ChatFragment"
+        android:label="Chats"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/nav_dash_board"
+        android:name="ru.kfu.prettyprinted.ui.home.dashboard.DashBoardFragment"
+        android:label="Tasks"
+        tools:layout="@layout/fragment_dash_board" />
+    <fragment
+        android:id="@+id/page_users"
+        android:name="ru.kfu.prettyprinted.ui.home.users.UsersFragment"
+        android:label="Users"
+        tools:layout="@layout/fragment_users" >
+        <action
+            android:id="@+id/action_page_users_to_nav_create_task"
+            app:destination="@id/nav_create_task" />
+    </fragment>
+    <fragment
+        android:id="@+id/page_status"
+        android:name="ru.kfu.prettyprinted.ui.home.task.create.helper.StatusFragment"
+        android:label="Status"
+        tools:layout="@layout/fragment_status" >
+        <action
+            android:id="@+id/action_page_status_to_nav_create_task"
+            app:destination="@id/nav_create_task" />
+    </fragment>
+    <fragment
+        android:id="@+id/page_type"
+        android:name="ru.kfu.prettyprinted.ui.home.task.create.helper.TypeFragment"
+        android:label="Type"
+        tools:layout="@layout/fragment_type" >
+        <action
+            android:id="@+id/action_page_type_to_nav_create_task"
+            app:destination="@id/nav_create_task" />
+    </fragment>
+    <fragment
+        android:id="@+id/page_priority"
+        android:name="ru.kfu.prettyprinted.ui.home.task.create.helper.PriorityFragment"
+        android:label="Priority"
+        tools:layout="@layout/fragment_priority" >
+        <action
+            android:id="@+id/action_page_priority_to_nav_create_task"
+            app:destination="@id/nav_create_task" />
+    </fragment>
 </navigation>
