@@ -33,14 +33,18 @@
     <string name="select">Select</string>
     <string name="open">Open</string>
     <string name="in_progress">In progress</string>
-    <string name="fix">Fix</string>
+<!--    <string name="fix">Fix</string>-->
     <string name="won_t_fix">Won`t fix</string>
     <string name="bug">Bug</string>
     <string name="feature">Feature</string>
     <string name="question">Question</string>
     <string name="priority">Priority</string>
     <string name="minor">Minor</string>
-    <string name="normal">Normal</string>
+<!--    <string name="normal">Normal</string>-->
     <string name="major">Major</string>
     <string name="critical">Critical</string>
+    <string name="tv_user_name">Ilgam Khasanov</string>
+    <string name="first_project">First project</string>
+    <string name="normal">Normal</string>
+    <string name="fix">Fix</string>
 </resources>

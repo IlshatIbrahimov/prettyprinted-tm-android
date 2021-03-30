@@ -71,7 +71,7 @@
     <fragment
         android:id="@+id/nav_dash_board"
         android:name="ru.kfu.prettyprinted.ui.home.dashboard.DashBoardFragment"
-        android:label="@string/dashboard"
+        android:label="Tasks"
         tools:layout="@layout/fragment_dash_board" />
     <fragment
         android:id="@+id/page_users"

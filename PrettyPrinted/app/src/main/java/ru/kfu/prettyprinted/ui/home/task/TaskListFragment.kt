@@ -10,17 +10,18 @@ import kotlinx.android.synthetic.main.fragment_task_list.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import ru.kfu.prettyprinted.data.remote.Resource
-import ru.kfu.prettyprinted.data.remote.api.ProjectApi
-import ru.kfu.prettyprinted.data.remote.res.TaskListResItem
-import ru.kfu.prettyprinted.data.repository.ProjectRepository
+import ru.kfu.prettyprinted.data.remote.api.TaskApi
+import ru.kfu.prettyprinted.data.remote.res.ProjectTasksResponse
+import ru.kfu.prettyprinted.data.remote.res.ProjectTasksResponseItem
+import ru.kfu.prettyprinted.data.repository.TaskRepository
 import ru.kfu.prettyprinted.databinding.FragmentTaskListBinding
 import ru.kfu.prettyprinted.extensions.snackbar
 import ru.kfu.prettyprinted.ui.base.BaseFragment
-import ru.kfu.prettyprinted.viewmodels.home.ProjectViewModel
+import ru.kfu.prettyprinted.viewmodels.home.TaskViewModel
 
 
 class TaskListFragment :
-    BaseFragment<ProjectViewModel, FragmentTaskListBinding, ProjectRepository>() {
+    BaseFragment<TaskViewModel, FragmentTaskListBinding, TaskRepository>() {
 
 
     private lateinit var mRecyclerView: RecyclerView
@@ -35,14 +36,10 @@ class TaskListFragment :
         mRecyclerView = rv_task
         mAdapter = TaskAdapter()
 
-        viewModel.getProjectList()
-        viewModel.project.observe(viewLifecycleOwner, Observer {
+        viewModel.getProjectTasks(1)
+        viewModel.tasks.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is Resource.Success -> it.value.forEach { item ->
-                    item.taskList[1].forEach { taskItem ->
-                        updateUI(taskItem)
-                    }
-                }
+                is Resource.Success -> updateUI(it.value)
                 is Resource.Failure -> requireView().snackbar("Упс, что-то пошло не так")
             }
         })
@@ -50,19 +47,19 @@ class TaskListFragment :
         mRecyclerView.adapter = mAdapter
     }
 
-    private fun updateUI(item: TaskListResItem) {
+    private fun updateUI(item: ProjectTasksResponse) {
         mAdapter.updateListProject(item)
     }
 
-    override fun getViewModel() = ProjectViewModel::class.java
+    override fun getViewModel() = TaskViewModel::class.java
 
     override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentTaskListBinding.inflate(inflater, container, false)
 
-    override fun getFragmentRepository(): ProjectRepository {
+    override fun getFragmentRepository(): TaskRepository {
         val token = runBlocking { userPreferences.authToken.first() }
-        val api = remoteDataUserSource.buildTokenApi(ProjectApi::class.java, token)
-        return ProjectRepository(api)
+        val api = remoteDataUserSource.buildTokenApi(TaskApi::class.java, token)
+        return TaskRepository(api)
     }
 
 }
